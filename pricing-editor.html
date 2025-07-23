@@ -1,0 +1,1836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPower Pricing Table Editor</title>
+    <style>
+        :root {
+            --yellow: #FFC907;
+            --orange: #FF5400;
+            --navy: #020244;
+            --light-blue: #E8F2F5;
+            --sky-blue: #59C8E3;
+            --royal-blue: #072B60;
+            --gray: #363C49;
+            --teal: #007B86;
+            --green: #00C9A2;
+            --yellow-orange: #FF8500;
+            --border-color: #ddd;
+            --success-color: var(--green);
+            --changed-color: #ffeaa7;
+            --error-color: #ff7675;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #f5f5f5;
+            color: var(--navy);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        h1 {
+            color: var(--navy);
+            font-size: 2rem;
+            margin: 0;
+            flex: 1;
+            text-align: center;
+        }
+
+        .back-button {
+            background-color: var(--orange);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .back-button:hover {
+            background-color: #e64900;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .back-button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        /* Auto-save status indicator */
+        .save-status {
+            font-size: 12px;
+            padding: 4px 12px;
+            border-radius: 12px;
+            background-color: var(--light-blue);
+            color: var(--gray);
+            transition: all 0.3s;
+            opacity: 0;
+            white-space: nowrap;
+        }
+
+        .save-status.visible {
+            opacity: 1;
+        }
+
+        .save-status.saving {
+            background-color: var(--changed-color);
+            color: var(--navy);
+        }
+
+        .save-status.saved {
+            background-color: var(--success-color);
+            color: white;
+        }
+
+        .save-status.error {
+            background-color: var(--error-color);
+            color: white;
+        }
+
+        .region-tabs {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 30px;
+            border-bottom: 3px solid var(--border-color);
+            background-color: white;
+            padding: 10px 10px 0;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .region-tab {
+            padding: 12px 24px;
+            background-color: white;
+            border: 2px solid var(--border-color);
+            border-bottom: none;
+            border-radius: 8px 8px 0 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .region-tab:hover {
+            background-color: var(--light-blue);
+        }
+
+        .region-tab.active {
+            background-color: var(--orange);
+            color: white;
+            border-color: var(--orange);
+        }
+
+        .region-content {
+            display: none;
+            background-color: white;
+            padding: 30px;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .region-content.active {
+            display: block;
+        }
+
+        .program-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background-color: #fafafa;
+            border-radius: 8px;
+            border-left: 4px solid var(--sky-blue);
+        }
+
+        .program-section h3 {
+            color: var(--royal-blue);
+            margin-bottom: 20px;
+            font-size: 1.4rem;
+        }
+
+        .rate-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .rate-table th {
+            background-color: var(--royal-blue);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 500;
+            position: sticky;
+            top: 0;
+        }
+
+        .rate-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .rate-table tr:hover {
+            background-color: var(--light-blue);
+        }
+
+        .rate-input {
+            width: 100%;
+            padding: 6px 10px;
+            border: 1px solid transparent;
+            background-color: transparent;
+            font-size: 14px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .rate-input:hover {
+            background-color: white;
+            border-color: var(--border-color);
+        }
+
+        .rate-input:focus {
+            outline: none;
+            border-color: var(--sky-blue);
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(89, 200, 227, 0.2);
+            cursor: text;
+        }
+
+        .rate-input.changed {
+            background-color: var(--changed-color);
+            font-weight: 600;
+        }
+
+        /* Confirmation Modal */
+        .confirmation-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .confirmation-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .confirmation-content h2 {
+            color: var(--navy);
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
+        .price-comparison {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            gap: 20px;
+        }
+
+        .price-box {
+            flex: 1;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .old-price {
+            background-color: #f8f9fa;
+            border: 2px solid var(--border-color);
+        }
+
+        .new-price {
+            background-color: var(--changed-color);
+            border: 2px solid var(--orange);
+        }
+
+        .price-label {
+            font-size: 14px;
+            color: var(--gray);
+            margin-bottom: 5px;
+        }
+
+        .price-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--navy);
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .modal-btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .confirm-btn {
+            background-color: var(--green);
+            color: white;
+        }
+
+        .confirm-btn:hover {
+            background-color: #00a086;
+        }
+
+        .cancel-btn {
+            background-color: var(--gray);
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background-color: #2a2e39;
+        }
+
+        @media (max-width: 768px) {
+            .region-tabs {
+                flex-wrap: wrap;
+            }
+            
+            .region-tab {
+                font-size: 14px;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="../index.html" class="back-button">
+                <span>←</span>
+                <span>Back to Quote Tool</span>
+            </a>
+            <h1>CPower Pricing Table Editor</h1>
+            <div class="save-status" id="saveStatus">Ready</div>
+        </header>
+
+        <div class="region-tabs">
+            <div class="region-tab active" onclick="switchRegion('isone')">ISO-NE</div>
+            <div class="region-tab" onclick="switchRegion('nyiso')">NYISO</div>
+            <div class="region-tab" onclick="switchRegion('ercot')">ERCOT</div>
+            <div class="region-tab" onclick="switchRegion('caiso')">CAISO</div>
+            <div class="region-tab" onclick="switchRegion('aps')">APS</div>
+            <div class="region-tab" onclick="switchRegion('mdu')">MDU</div>
+            <div class="region-tab" onclick="switchRegion('miso')">MISO</div>
+            <div class="region-tab" onclick="switchRegion('pjm')">PJM</div>
+        </div>
+
+        <!-- ISO-NE Region -->
+        <div class="region-content active" id="isone-content">
+            <h2>ISO-NE Region Pricing</h2>
+            
+            <div class="program-section">
+                <h3>ADCR Hourly Rates ($/kWh)</h3>
+                <table class="rate-table">
+                    <thead>
+                        <tr>
+                            <th>Zone</th>
+                            <th>2025-26</th>
+                            <th>2026-27</th>
+                            <th>2027-28</th>
+                            <th>2028-29</th>
+                            <th>2029-30</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adcr-rates">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="program-section">
+                <h3>OPHR Rates ($/kWh)</h3>
+                <div id="ophr-rates">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="program-section">
+                <h3>Connected Solutions Rates ($/kW)</h3>
+                <div id="connected-solutions-rates">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="program-section">
+                <h3>Clean Peak Certificate Values ($/kW-year)</h3>
+                <table class="rate-table">
+                    <thead>
+                        <tr>
+                            <th>Clean Peak</th>
+                            <th>2025-26</th>
+                            <th>2026-27</th>
+                            <th>2027-28</th>
+                            <th>2028-29</th>
+                            <th>2029-30</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clean-peak-rates">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- NYISO Region -->
+        <div class="region-content" id="nyiso-content">
+            <h2>NYISO Region Pricing</h2>
+            
+            <div class="program-section">
+                <h3>SCR Rates ($/kW-month)</h3>
+                <table class="rate-table">
+                    <thead>
+                        <tr>
+                            <th>Zone</th>
+                            <th>Summer Rate</th>
+                            <th>Winter Rate</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scr-rates">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="program-section">
+                <h3>CSRP Rates ($/kW-month)</h3>
+                <div id="csrp-rates">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="program-section">
+                <h3>DLRP Rates ($/kW-month)</h3>
+                <div id="dlrp-rates">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="program-section">
+                <h3>Energy Payment Rates</h3>
+                <div id="energy-payment-rates">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ERCOT Region -->
+        <div class="region-content" id="ercot-content">
+            <h2>ERCOT Region Pricing</h2>
+            
+            <div class="program-section">
+                <h3>4CP (Capacity Tag) Rates</h3>
+                <div id="4cp-rates">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="program-section">
+                <h3>ERS (Emergency Response Service) Rates</h3>
+                <div id="ers-rates">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+
+            <div class="program-section">
+                <h3>LR-RRS Monthly Rates</h3>
+                <table class="rate-table">
+                    <thead>
+                        <tr>
+                            <th>Month</th>
+                            <th>Average Price ($/MW-hr)</th>
+                            <th>Proration Factor</th>
+                            <th>Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lrrrs-rates">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="program-section">
+                <h3>ECRS Monthly Rates</h3>
+                <table class="rate-table">
+                    <thead>
+                        <tr>
+                            <th>Month</th>
+                            <th>Average Price ($/MW-hr)</th>
+                            <th>Hours</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ecrs-rates">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- CAISO Region -->
+        <div class="region-content" id="caiso-content">
+            <h2>CAISO Region Pricing</h2>
+            <div class="program-section">
+                <h3>Resource Adequacy (RA) Rates</h3>
+                <p style="padding: 20px; background-color: var(--light-blue); border-radius: 8px;">
+                    RA rates are entered directly in the quote tool as they are contract-specific.<br>
+                    This region uses fixed annual rates ($/kW-year) negotiated per contract.
+                </p>
+            </div>
+        </div>
+
+        <!-- APS Region -->
+        <div class="region-content" id="aps-content">
+            <h2>APS Region Pricing</h2>
+            <div class="program-section">
+                <h3>Peak Solutions Rates</h3>
+                <div id="peak-solutions-rates">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- MDU Region -->
+        <div class="region-content" id="mdu-content">
+            <h2>MDU Region Pricing</h2>
+            <div class="program-section">
+                <h3>DRR (Demand Response Resource) Rates</h3>
+                <div id="drr-rates">
+                    <!-- Will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- MISO Region -->
+        <div class="region-content" id="miso-content">
+            <h2>MISO Region Pricing</h2>
+            <div class="program-section">
+                <h3>LMR (Load Modifying Resource) Capacity Rates</h3>
+                <table class="rate-table">
+                    <thead>
+                        <tr>
+                            <th>Year Range</th>
+                            <th>Capacity Rate ($/kW-month)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="lmr-rates">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- PJM Region -->
+        <div class="region-content" id="pjm-content">
+            <h2>PJM Region Pricing</h2>
+            <div class="program-section">
+                <h3>Emergency Capacity (EC) Rates by Zone</h3>
+                <table class="rate-table">
+                    <thead>
+                        <tr>
+                            <th>Zone</th>
+                            <th>Capacity Rate ($/kW-day)</th>
+                            <th>Excess Rate ($/MW-day)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ec-rates">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="program-section">
+                <h3>ELCC Values by Year</h3>
+                <table class="rate-table">
+                    <thead>
+                        <tr>
+                            <th>Year</th>
+                            <th>ELCC Value</th>
+                        </tr>
+                    </thead>
+                    <tbody id="elcc-values">
+                        <!-- Will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="confirmation-modal" id="confirmationModal">
+        <div class="confirmation-content">
+            <h2>Confirm Price Change</h2>
+            <p>Are you sure you want to update this price?</p>
+            
+            <div class="price-comparison">
+                <div class="price-box old-price">
+                    <div class="price-label">Old Price</div>
+                    <div class="price-value" id="oldPriceDisplay">$0.00</div>
+                </div>
+                <div class="price-box new-price">
+                    <div class="price-label">New Price</div>
+                    <div class="price-value" id="newPriceDisplay">$0.00</div>
+                </div>
+            </div>
+            
+            <div class="modal-buttons">
+                <button class="modal-btn cancel-btn" onclick="cancelPriceChange()">Cancel</button>
+                <button class="modal-btn confirm-btn" onclick="confirmPriceChange()">Confirm</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Configuration
+        // Connect to the pricing editor server
+        const SERVER_URL = 'http://localhost:3002';
+        
+        // Global state
+        let originalData = {};
+        let currentData = {};
+        let additionalContent = ''; // Store content after PricingTable definition
+        let pendingChange = null;
+        let isModalOpen = false;
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('=== Pricing Editor Auto Initializing ===');
+            console.log('Server URL:', SERVER_URL);
+            console.log('Current page URL:', window.location.href);
+            console.log('Loading pricing data...');
+            
+            loadPricingData();
+        });
+
+        // Check server connectivity
+        async function checkServerConnection() {
+            console.log('checkServerConnection() called');
+            console.log('Checking server at:', `${SERVER_URL}/api/pricing`);
+            
+            try {
+                const response = await fetch(`${SERVER_URL}/api/pricing`, {
+                    method: 'HEAD',
+                    mode: 'cors'
+                });
+                console.log('Server check response:', response.ok ? 'Connected' : 'Failed');
+                return response.ok;
+            } catch (error) {
+                console.error('Server check error:', error.message);
+                return false;
+            }
+        }
+
+        // Load pricing data from server
+        async function loadPricingData() {
+            console.log('loadPricingData() called');
+            console.log('Fetching from:', `${SERVER_URL}/api/pricing`);
+            
+            try {
+                const response = await fetch(`${SERVER_URL}/api/pricing`);
+                console.log('Fetch response status:', response.status, response.statusText);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const result = await response.json();
+                console.log('Received result:', result ? 'Success' : 'Failed');
+                console.log('Result data length:', result.data ? result.data.length : 0);
+                
+                // Use a safer approach - temporarily execute the file to get the PricingTable object
+                try {
+                    // Create a temporary function to safely execute the code
+                    const tempFunc = new Function(result.data + '\nreturn PricingTable;');
+                    const pricingTable = tempFunc();
+                    
+                    console.log('Successfully loaded PricingTable');
+                    console.log('PricingTable type:', typeof pricingTable);
+                    console.log('PricingTable keys:', Object.keys(pricingTable));
+                    
+                    // Extract only the data properties (rates), not methods
+                    const dataOnly = {};
+                    const rateKeys = ['isoneRates', 'nyisoRates', 'energyRates', 'ercotRates', 'apsRates', 'mduRates', 'misoRates', 'pjmRates'];
+                    
+                    for (const key of rateKeys) {
+                        if (pricingTable[key] && typeof pricingTable[key] !== 'function') {
+                            dataOnly[key] = pricingTable[key];
+                        }
+                    }
+                    
+                    console.log('Extracted data keys:', Object.keys(dataOnly));
+                    
+                    originalData = JSON.parse(JSON.stringify(dataOnly));
+                    currentData = JSON.parse(JSON.stringify(dataOnly));
+                    
+                    console.log('About to populate tables...');
+                    populateAllTables();
+                    console.log('Tables populated successfully');
+                    
+                    updateSaveStatus('Connected', 'saved');
+                    setTimeout(() => updateSaveStatus('Ready', ''), 2000);
+                } catch (parseError) {
+                    console.error('Error parsing PricingTable:', parseError);
+                    throw new Error('Failed to parse PricingTable: ' + parseError.message);
+                }
+            } catch (error) {
+                console.error('=== ERROR LOADING PRICING DATA ===');
+                console.error('Error type:', error.name);
+                console.error('Error message:', error.message);
+                console.error('Full error:', error);
+                
+                if (error.message.includes('Failed to fetch')) {
+                    console.error('Connection failed - server may not be running');
+                    alert(`Cannot connect to the server at ${SERVER_URL}\n\nPlease ensure the server is running:\n1. Navigate to the public/core directory\n2. Run: node pricing-editor-server.js`);
+                } else {
+                    alert('Failed to load pricing data: ' + error.message);
+                }
+            }
+        }
+
+        // Save pricing data to server
+        async function savePricingData() {
+            try {
+                updateSaveStatus('Saving...', 'saving');
+                
+                // Get the original file content
+                const response = await fetch(`${SERVER_URL}/api/pricing`);
+                const result = await response.json();
+                
+                // Create a new file content by updating each rate section
+                let fileContent = result.data;
+                
+                // Update each rate section
+                const rateKeys = ['isoneRates', 'nyisoRates', 'energyRates', 'ercotRates', 'apsRates', 'mduRates', 'misoRates', 'pjmRates'];
+                
+                for (const key of rateKeys) {
+                    if (currentData[key]) {
+                        // Find the section in the file with trailing comma if present
+                        const sectionRegex = new RegExp(`"${key}":\\s*{[\\s\\S]*?}(?=,|\\s*}\\s*;|\\s*$)`);
+                        const sectionWithCommaRegex = new RegExp(`"${key}":\\s*{[\\s\\S]*?},?`);
+                        const sectionMatch = fileContent.match(sectionWithCommaRegex);
+                        
+                        if (sectionMatch) {
+                            // Check if the original had a trailing comma
+                            const hasTrailingComma = sectionMatch[0].trim().endsWith(',');
+                            
+                            // Replace with updated data, preserving comma if needed
+                            const newSection = `"${key}": ${JSON.stringify(currentData[key], null, 8).replace(/\n/g, '\n    ')}${hasTrailingComma ? ',' : ''}`;
+                            fileContent = fileContent.replace(sectionMatch[0], newSection);
+                        }
+                    }
+                }
+                
+                console.log('Updated file content length:', fileContent.length);
+                
+                // Ensure the PricingTable object is properly closed
+                if (!fileContent.includes('};')) {
+                    console.warn('Missing closing }; for PricingTable object');
+                    // Find the last closing brace and add semicolon
+                    const lastBraceIndex = fileContent.lastIndexOf('}');
+                    if (lastBraceIndex > -1) {
+                        const beforeExports = fileContent.indexOf('// Export for use');
+                        if (beforeExports > -1 && lastBraceIndex < beforeExports) {
+                            fileContent = fileContent.substring(0, lastBraceIndex + 1) + ';' + fileContent.substring(lastBraceIndex + 1);
+                        }
+                    }
+                }
+                
+                // Validate the generated JavaScript before saving
+                try {
+                    // Try to evaluate the pricing table structure
+                    const testEval = `(function() { 
+                        const PricingTable = ${fileContent.match(/const PricingTable = ({[\s\S]*?});/)?.[1] || '{}'}; 
+                        return true; 
+                    })()`;
+                    eval(testEval);
+                    console.log('JavaScript validation passed');
+                } catch (validationError) {
+                    console.error('Invalid JavaScript generated:', validationError);
+                    throw new Error('Generated invalid JavaScript: ' + validationError.message);
+                }
+
+                const saveResponse = await fetch(`${SERVER_URL}/api/save-pricing`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ content: fileContent })
+                });
+
+                if (!saveResponse.ok) {
+                    throw new Error(`HTTP error! status: ${saveResponse.status}`);
+                }
+
+                const saveResult = await saveResponse.json();
+                if (saveResult.success) {
+                    updateSaveStatus('Saved', 'saved');
+                    setTimeout(() => updateSaveStatus('Ready', ''), 2000);
+                } else {
+                    throw new Error(saveResult.error || 'Save failed');
+                }
+            } catch (error) {
+                console.error('Error saving pricing data:', error);
+                let errorMessage = 'Error saving';
+                
+                if (error.message.includes('Invalid JavaScript')) {
+                    errorMessage = 'Syntax error - check values';
+                    alert('Error: The changes you made created invalid JavaScript syntax. Please check your values and try again.\n\nDetails: ' + error.message);
+                } else if (error.message.includes('Failed to save')) {
+                    errorMessage = 'Server error';
+                    alert('Error: Failed to save to server. Please check if the server is running.');
+                } else {
+                    errorMessage = 'Error: ' + error.message.substring(0, 30);
+                }
+                
+                updateSaveStatus(errorMessage, 'error');
+                setTimeout(() => updateSaveStatus('Ready', ''), 5000);
+                
+                // Show restore option
+                if (confirm('Would you like to reload the original pricing data?')) {
+                    loadPricingData();
+                }
+            }
+        }
+
+        // Update save status indicator
+        function updateSaveStatus(text, status) {
+            const indicator = document.getElementById('saveStatus');
+            indicator.textContent = text;
+            indicator.className = 'save-status visible ' + status;
+            
+            if (!status) {
+                setTimeout(() => {
+                    indicator.classList.remove('visible');
+                }, 500);
+            }
+        }
+
+        // Switch between regions
+        function switchRegion(region) {
+            // Update tabs
+            document.querySelectorAll('.region-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Update content
+            document.querySelectorAll('.region-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.getElementById(region + '-content').classList.add('active');
+        }
+
+        // Create rate input element
+        function createRateInput(value, path) {
+            const input = document.createElement('input');
+            input.type = 'number';
+            input.className = 'rate-input';
+            input.value = value || 0;
+            input.step = '0.01';
+            input.dataset.path = path;
+            input.dataset.originalValue = value || 0;
+            
+            // Check if value has been changed from original
+            const originalValue = getNestedValue(originalData, path);
+            if (value !== originalValue) {
+                input.classList.add('changed');
+            }
+            
+            // Add input validation
+            input.addEventListener('input', function() {
+                // Remove any non-numeric characters except decimal point
+                let value = this.value;
+                value = value.replace(/[^0-9.-]/g, '');
+                
+                // Ensure only one decimal point
+                const parts = value.split('.');
+                if (parts.length > 2) {
+                    value = parts[0] + '.' + parts.slice(1).join('');
+                }
+                
+                // Ensure only one minus sign at the beginning
+                if (value.indexOf('-') > 0) {
+                    value = value.replace(/-/g, '');
+                }
+                
+                this.value = value;
+            });
+            
+            input.addEventListener('keypress', handleKeyPress);
+            input.addEventListener('blur', function() {
+                // Don't clear pendingChange if modal is open
+                if (isModalOpen) {
+                    console.log('Blur event ignored - modal is open');
+                    return;
+                }
+                
+                // Revert if no change was confirmed
+                if (pendingChange && pendingChange.input === input) {
+                    console.log('Blur event - reverting value');
+                    input.value = input.dataset.originalValue;
+                    pendingChange = null;
+                }
+            });
+            
+            return input;
+        }
+
+        // Handle key press events
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const input = event.target;
+                const newValue = parseFloat(input.value);
+                const currentValue = parseFloat(input.dataset.originalValue);
+                
+                console.log('=== Enter pressed on input ===');
+                console.log('Input path:', input.dataset.path);
+                console.log('Current value:', currentValue);
+                console.log('New value:', newValue);
+                console.log('Is valid:', !isNaN(newValue) && newValue >= 0);
+                
+                if (newValue !== currentValue && !isNaN(newValue) && newValue >= 0) {
+                    console.log('Values differ, preparing confirmation modal');
+                    
+                    // Store pending change
+                    pendingChange = {
+                        input: input,
+                        path: input.dataset.path,
+                        oldValue: currentValue,
+                        newValue: newValue
+                    };
+                    
+                    console.log('Pending change stored:', pendingChange);
+                    
+                    // Show confirmation modal
+                    showConfirmationModal(currentValue, newValue);
+                } else {
+                    console.log('No change or invalid value, ignoring');
+                }
+            }
+        }
+
+        // Show confirmation modal
+        function showConfirmationModal(oldValue, newValue) {
+            console.log('showConfirmationModal() called');
+            console.log('Setting old price display to:', `$${oldValue.toFixed(2)}`);
+            console.log('Setting new price display to:', `$${newValue.toFixed(2)}`);
+            
+            isModalOpen = true;
+            console.log('Modal open flag set to true');
+            
+            document.getElementById('oldPriceDisplay').textContent = `$${oldValue.toFixed(2)}`;
+            document.getElementById('newPriceDisplay').textContent = `$${newValue.toFixed(2)}`;
+            
+            const modal = document.getElementById('confirmationModal');
+            console.log('Modal element found:', modal ? 'Yes' : 'No');
+            console.log('Setting modal display to: flex');
+            modal.style.display = 'flex';
+            console.log('Modal display property after setting:', modal.style.display);
+            console.log('Modal computed display:', window.getComputedStyle(modal).display);
+        }
+
+        // Confirm price change
+        async function confirmPriceChange() {
+            console.log('=== confirmPriceChange() called ===');
+            console.log('pendingChange exists:', pendingChange ? 'Yes' : 'No');
+            
+            if (pendingChange) {
+                const { input, path, newValue } = pendingChange;
+                
+                console.log('Confirming price change:');
+                console.log('Path:', path);
+                console.log('New Value:', newValue);
+                console.log('Current data before update:', getNestedValue(currentData, path));
+                
+                // Update current data
+                setNestedValue(currentData, path, newValue);
+                
+                console.log('Current data after update:', getNestedValue(currentData, path));
+                
+                // Update input state
+                input.dataset.originalValue = newValue;
+                input.classList.add('changed');
+                
+                // Auto-save
+                try {
+                    await savePricingData();
+                    // Remove changed class after successful save
+                    input.classList.remove('changed');
+                } catch (error) {
+                    console.error('Error saving:', error);
+                    // Show detailed error message
+                    let errorMsg = 'Failed to save changes';
+                    if (error.message.includes('Failed to fetch')) {
+                        errorMsg = 'Lost connection to server. Please ensure the server is still running.';
+                    } else if (error.message.includes('HTTP error')) {
+                        errorMsg = 'Server error: ' + error.message;
+                    }
+                    alert(errorMsg);
+                    
+                    // Revert on error
+                    setNestedValue(currentData, path, pendingChange.oldValue);
+                    input.value = pendingChange.oldValue;
+                    input.dataset.originalValue = pendingChange.oldValue;
+                    input.classList.remove('changed');
+                }
+                
+                pendingChange = null;
+            }
+            
+            isModalOpen = false;
+            console.log('Modal open flag set to false');
+            document.getElementById('confirmationModal').style.display = 'none';
+        }
+
+        // Cancel price change
+        function cancelPriceChange() {
+            console.log('cancelPriceChange() called');
+            
+            if (pendingChange) {
+                console.log('Reverting input value from', pendingChange.input.value, 'to', pendingChange.oldValue);
+                // Revert input value
+                pendingChange.input.value = pendingChange.oldValue;
+                pendingChange = null;
+            }
+            
+            isModalOpen = false;
+            console.log('Modal open flag set to false');
+            console.log('Hiding confirmation modal');
+            document.getElementById('confirmationModal').style.display = 'none';
+        }
+
+        // Get nested object value by path
+        function getNestedValue(obj, path) {
+            const keys = path.split('.');
+            let current = obj;
+            
+            for (let i = 0; i < keys.length; i++) {
+                const key = keys[i];
+                if (key.includes('[') && key.includes(']')) {
+                    const arrayKey = key.substring(0, key.indexOf('['));
+                    const index = parseInt(key.substring(key.indexOf('[') + 1, key.indexOf(']')));
+                    current = current[arrayKey][index];
+                } else {
+                    current = current[key];
+                }
+            }
+            
+            return current;
+        }
+
+        // Set nested object value by path
+        function setNestedValue(obj, path, value) {
+            console.log('setNestedValue called with:', { path, value });
+            const keys = path.split('.');
+            console.log('Split keys:', keys);
+            let current = obj;
+            
+            for (let i = 0; i < keys.length - 1; i++) {
+                const key = keys[i];
+                console.log(`Navigating to key[${i}]: ${key}`);
+                if (key.includes('[') && key.includes(']')) {
+                    const arrayKey = key.substring(0, key.indexOf('['));
+                    const index = parseInt(key.substring(key.indexOf('[') + 1, key.indexOf(']')));
+                    current = current[arrayKey][index];
+                } else {
+                    current = current[key];
+                }
+                console.log('Current object after navigation:', current);
+            }
+            
+            const finalKey = keys[keys.length - 1];
+            console.log('Setting final key:', finalKey, 'to value:', value);
+            current[finalKey] = value;
+            console.log('Value after setting:', current[finalKey]);
+        }
+
+
+        // Populate all tables
+        function populateAllTables() {
+            populateISONETables();
+            populateNYISOTables();
+            populateERCOTTables();
+            populateAPSTables();
+            populateMDUTables();
+            populateMISOTables();
+            populatePJMTables();
+        }
+
+        // Populate ISO-NE tables
+        function populateISONETables() {
+            // ADCR Rates
+            const adcrBody = document.getElementById('adcr-rates');
+            adcrBody.innerHTML = '';
+            
+            for (const zone in currentData.isoneRates.adcr) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${zone}</td>`;
+                
+                for (const year in currentData.isoneRates.adcr[zone]) {
+                    const cell = document.createElement('td');
+                    const input = createRateInput(
+                        currentData.isoneRates.adcr[zone][year],
+                        `isoneRates.adcr.${zone}.${year}`
+                    );
+                    cell.appendChild(input);
+                    row.appendChild(cell);
+                }
+                
+                adcrBody.appendChild(row);
+            }
+
+            // OPHR Rates (grouped by product type)
+            const ophrContainer = document.getElementById('ophr-rates');
+            ophrContainer.innerHTML = '';
+            
+            const ophrProducts = [...new Set(currentData.isoneRates.ophr.map(r => r.product))];
+            
+            ophrProducts.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.innerHTML = `<h4>${product}</h4>`;
+                
+                const table = document.createElement('table');
+                table.className = 'rate-table';
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Zone</th>
+                            <th>2025-26</th>
+                            <th>2026-27</th>
+                            <th>2027-28</th>
+                            <th>2028-29</th>
+                            <th>2029-30</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                `;
+                
+                const tbody = table.querySelector('tbody');
+                const productRates = currentData.isoneRates.ophr.filter(r => r.product === product);
+                
+                productRates.forEach((rate, index) => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${rate.zone}</td>`;
+                    
+                    ['25-26', '26-27', '27-28', '28-29', '29-30'].forEach(year => {
+                        const cell = document.createElement('td');
+                        const rateIndex = currentData.isoneRates.ophr.findIndex(r => 
+                            r.zone === rate.zone && r.product === rate.product
+                        );
+                        const input = createRateInput(
+                            rate[year],
+                            `isoneRates.ophr[${rateIndex}].${year}`
+                        );
+                        cell.appendChild(input);
+                        row.appendChild(cell);
+                    });
+                    
+                    tbody.appendChild(row);
+                });
+                
+                productDiv.appendChild(table);
+                ophrContainer.appendChild(productDiv);
+            });
+
+            // Connected Solutions
+            const csContainer = document.getElementById('connected-solutions-rates');
+            csContainer.innerHTML = '';
+            
+            for (const utility in currentData.isoneRates.connectedSolutions) {
+                const utilityDiv = document.createElement('div');
+                utilityDiv.innerHTML = `<h4>${utility}</h4>`;
+                
+                for (const dispatchType in currentData.isoneRates.connectedSolutions[utility]) {
+                    const table = document.createElement('table');
+                    table.className = 'rate-table';
+                    table.innerHTML = `
+                        <thead>
+                            <tr>
+                                <th>${dispatchType}</th>
+                                <th>2025-26</th>
+                                <th>2026-27</th>
+                                <th>2027-28</th>
+                                <th>2028-29</th>
+                                <th>2029-30</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    `;
+                    
+                    const tbody = table.querySelector('tbody');
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>Rate</td>`;
+                    
+                    ['25-26', '26-27', '27-28', '28-29', '29-30'].forEach(year => {
+                        const cell = document.createElement('td');
+                        const input = createRateInput(
+                            currentData.isoneRates.connectedSolutions[utility][dispatchType][year],
+                            `isoneRates.connectedSolutions.${utility}.${dispatchType}.${year}`
+                        );
+                        cell.appendChild(input);
+                        row.appendChild(cell);
+                    });
+                    
+                    tbody.appendChild(row);
+                    utilityDiv.appendChild(table);
+                }
+                
+                csContainer.appendChild(utilityDiv);
+            }
+
+            // Clean Peak
+            const cleanPeakBody = document.getElementById('clean-peak-rates');
+            cleanPeakBody.innerHTML = '';
+            
+            // Create a single row for Clean Peak
+            const row = document.createElement('tr');
+            row.innerHTML = `<td>Certificate Values</td>`;
+            
+            // Add cells for each year (limiting to first 5 years like other programs)
+            ['25-26', '26-27', '27-28', '28-29', '29-30'].forEach(year => {
+                const cell = document.createElement('td');
+                const input = createRateInput(
+                    currentData.isoneRates.cleanPeak[year],
+                    `isoneRates.cleanPeak.${year}`
+                );
+                cell.appendChild(input);
+                row.appendChild(cell);
+            });
+            
+            cleanPeakBody.appendChild(row);
+        }
+
+        // Populate NYISO tables
+        function populateNYISOTables() {
+            // SCR Rates
+            const scrBody = document.getElementById('scr-rates');
+            scrBody.innerHTML = '';
+            
+            for (const zone in currentData.nyisoRates.scr) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${zone}</td>`;
+                
+                const summerCell = document.createElement('td');
+                const summerInput = createRateInput(
+                    currentData.nyisoRates.scr[zone].summer,
+                    `nyisoRates.scr.${zone}.summer`
+                );
+                summerCell.appendChild(summerInput);
+                row.appendChild(summerCell);
+                
+                const winterCell = document.createElement('td');
+                const winterInput = createRateInput(
+                    currentData.nyisoRates.scr[zone].winter,
+                    `nyisoRates.scr.${zone}.winter`
+                );
+                winterCell.appendChild(winterInput);
+                row.appendChild(winterCell);
+                
+                scrBody.appendChild(row);
+            }
+
+            // CSRP Rates
+            const csrpContainer = document.getElementById('csrp-rates');
+            csrpContainer.innerHTML = '';
+            
+            for (const location in currentData.nyisoRates.csrp) {
+                const locationDiv = document.createElement('div');
+                locationDiv.innerHTML = `<h4>Location: ${location}</h4>`;
+                
+                const table = document.createElement('table');
+                table.className = 'rate-table';
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Utility</th>
+                            <th>Tier 1</th>
+                            <th>Tier 2</th>
+                            <th>Select</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                `;
+                
+                const tbody = table.querySelector('tbody');
+                
+                for (const utility in currentData.nyisoRates.csrp[location]) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${utility}</td>`;
+                    
+                    ['1', '2', 'Select'].forEach(tier => {
+                        const cell = document.createElement('td');
+                        const input = createRateInput(
+                            currentData.nyisoRates.csrp[location][utility][tier],
+                            `nyisoRates.csrp.${location}.${utility}.${tier}`
+                        );
+                        cell.appendChild(input);
+                        row.appendChild(cell);
+                    });
+                    
+                    tbody.appendChild(row);
+                }
+                
+                locationDiv.appendChild(table);
+                csrpContainer.appendChild(locationDiv);
+            }
+
+            // DLRP Rates
+            const dlrpContainer = document.getElementById('dlrp-rates');
+            dlrpContainer.innerHTML = '';
+            
+            for (const location in currentData.nyisoRates.dlrp) {
+                const locationDiv = document.createElement('div');
+                locationDiv.innerHTML = `<h4>Location: ${location}</h4>`;
+                
+                const table = document.createElement('table');
+                table.className = 'rate-table';
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Utility</th>
+                            <th>Tier 1</th>
+                            <th>Tier 2</th>
+                            <th>Select</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                `;
+                
+                const tbody = table.querySelector('tbody');
+                
+                for (const utility in currentData.nyisoRates.dlrp[location]) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${utility}</td>`;
+                    
+                    ['1', '2', 'Select'].forEach(tier => {
+                        const cell = document.createElement('td');
+                        const input = createRateInput(
+                            currentData.nyisoRates.dlrp[location][utility][tier],
+                            `nyisoRates.dlrp.${location}.${utility}.${tier}`
+                        );
+                        cell.appendChild(input);
+                        row.appendChild(cell);
+                    });
+                    
+                    tbody.appendChild(row);
+                }
+                
+                locationDiv.appendChild(table);
+                dlrpContainer.appendChild(locationDiv);
+            }
+
+            // Energy Payment Rates
+            const energyContainer = document.getElementById('energy-payment-rates');
+            energyContainer.innerHTML = '';
+            
+            // SCR Energy Rates
+            const scrEnergyDiv = document.createElement('div');
+            scrEnergyDiv.innerHTML = '<h4>SCR Energy Rates</h4>';
+            const scrEnergyTable = document.createElement('table');
+            scrEnergyTable.className = 'rate-table';
+            scrEnergyTable.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Zone</th>
+                        <th>Hours</th>
+                        <th>Energy Rate ($/kWh)</th>
+                        <th>Multiplier ($/kW)</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            `;
+            const scrEnergyBody = scrEnergyTable.querySelector('tbody');
+            
+            for (const zone in currentData.energyRates.SCR) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${zone}</td>`;
+                
+                const hoursCell = document.createElement('td');
+                const hoursInput = createRateInput(
+                    currentData.energyRates.SCR[zone].hours,
+                    `energyRates.SCR.${zone}.hours`
+                );
+                hoursCell.appendChild(hoursInput);
+                row.appendChild(hoursCell);
+                
+                const energyCell = document.createElement('td');
+                const energyInput = createRateInput(
+                    currentData.energyRates.SCR[zone].energyRate,
+                    `energyRates.SCR.${zone}.energyRate`
+                );
+                energyCell.appendChild(energyInput);
+                row.appendChild(energyCell);
+                
+                const multiplierCell = document.createElement('td');
+                const multiplierInput = createRateInput(
+                    currentData.energyRates.SCR[zone].multiplier,
+                    `energyRates.SCR.${zone}.multiplier`
+                );
+                multiplierCell.appendChild(multiplierInput);
+                row.appendChild(multiplierCell);
+                
+                scrEnergyBody.appendChild(row);
+            }
+            
+            scrEnergyDiv.appendChild(scrEnergyTable);
+            energyContainer.appendChild(scrEnergyDiv);
+        }
+
+        // Populate ERCOT tables
+        function populateERCOTTables() {
+            // 4CP Rates
+            const fourCPContainer = document.getElementById('4cp-rates');
+            fourCPContainer.innerHTML = '';
+            
+            for (const utility in currentData.ercotRates.captag4cp) {
+                const utilityDiv = document.createElement('div');
+                utilityDiv.innerHTML = `<h4>${utility}</h4>`;
+                
+                const table = document.createElement('table');
+                table.className = 'rate-table';
+                table.innerHTML = `
+                    <thead>
+                        <tr>
+                            <th>Service Class</th>
+                            <th>Monthly Charge ($/kW-month)</th>
+                            <th>Annual Multiplier</th>
+                            <th>Unit</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                `;
+                
+                const tbody = table.querySelector('tbody');
+                
+                for (const serviceClass in currentData.ercotRates.captag4cp[utility]) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td>${serviceClass}</td>`;
+                    
+                    const monthlyCell = document.createElement('td');
+                    const monthlyInput = createRateInput(
+                        currentData.ercotRates.captag4cp[utility][serviceClass].monthlyCharge,
+                        `ercotRates.captag4cp.${utility}.${serviceClass}.monthlyCharge`
+                    );
+                    monthlyCell.appendChild(monthlyInput);
+                    row.appendChild(monthlyCell);
+                    
+                    const annualCell = document.createElement('td');
+                    const annualInput = createRateInput(
+                        currentData.ercotRates.captag4cp[utility][serviceClass].annualMultiplier,
+                        `ercotRates.captag4cp.${utility}.${serviceClass}.annualMultiplier`
+                    );
+                    annualCell.appendChild(annualInput);
+                    row.appendChild(annualCell);
+                    
+                    row.innerHTML += `<td>${currentData.ercotRates.captag4cp[utility][serviceClass].unit || '$/kW-month'}</td>`;
+                    
+                    tbody.appendChild(row);
+                }
+                
+                utilityDiv.appendChild(table);
+                fourCPContainer.appendChild(utilityDiv);
+            }
+
+            // LR-RRS Rates
+            const lrrrsBody = document.getElementById('lrrrs-rates');
+            lrrrsBody.innerHTML = '';
+            
+            for (const month in currentData.ercotRates.lrRrs.monthlyPricing) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${month}</td>`;
+                
+                const priceCell = document.createElement('td');
+                const priceInput = createRateInput(
+                    currentData.ercotRates.lrRrs.monthlyPricing[month].avgPrice,
+                    `ercotRates.lrRrs.monthlyPricing.${month}.avgPrice`
+                );
+                priceCell.appendChild(priceInput);
+                row.appendChild(priceCell);
+                
+                const prorationCell = document.createElement('td');
+                const prorationInput = createRateInput(
+                    currentData.ercotRates.lrRrs.monthlyPricing[month].proration,
+                    `ercotRates.lrRrs.monthlyPricing.${month}.proration`
+                );
+                prorationCell.appendChild(prorationInput);
+                row.appendChild(prorationCell);
+                
+                const hoursCell = document.createElement('td');
+                const hoursInput = createRateInput(
+                    currentData.ercotRates.lrRrs.monthlyPricing[month].hours,
+                    `ercotRates.lrRrs.monthlyPricing.${month}.hours`
+                );
+                hoursCell.appendChild(hoursInput);
+                row.appendChild(hoursCell);
+                
+                lrrrsBody.appendChild(row);
+            }
+
+            // ECRS Rates
+            const ecrsBody = document.getElementById('ecrs-rates');
+            ecrsBody.innerHTML = '';
+            
+            for (const month in currentData.ercotRates.ecrs.monthlyPricing) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${month}</td>`;
+                
+                const priceCell = document.createElement('td');
+                const priceInput = createRateInput(
+                    currentData.ercotRates.ecrs.monthlyPricing[month].avgPrice,
+                    `ercotRates.ecrs.monthlyPricing.${month}.avgPrice`
+                );
+                priceCell.appendChild(priceInput);
+                row.appendChild(priceCell);
+                
+                const hoursCell = document.createElement('td');
+                const hoursInput = createRateInput(
+                    currentData.ercotRates.ecrs.monthlyPricing[month].hours,
+                    `ercotRates.ecrs.monthlyPricing.${month}.hours`
+                );
+                hoursCell.appendChild(hoursInput);
+                row.appendChild(hoursCell);
+                
+                ecrsBody.appendChild(row);
+            }
+        }
+
+        // Populate APS tables
+        function populateAPSTables() {
+            const psContainer = document.getElementById('peak-solutions-rates');
+            psContainer.innerHTML = '';
+            
+            // Day Ahead Capacity
+            const daDiv = document.createElement('div');
+            daDiv.innerHTML = '<h4>Day Ahead Capacity Rates ($/kW-month)</h4>';
+            const daTable = document.createElement('table');
+            daTable.className = 'rate-table';
+            daTable.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Year Range</th>
+                        <th>Rate</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            `;
+            const daBody = daTable.querySelector('tbody');
+            
+            for (const year in currentData.apsRates.peakSolutions.dayAheadCapacity) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>20${year}</td>`;
+                
+                const cell = document.createElement('td');
+                const input = createRateInput(
+                    currentData.apsRates.peakSolutions.dayAheadCapacity[year],
+                    `apsRates.peakSolutions.dayAheadCapacity.${year}`
+                );
+                cell.appendChild(input);
+                row.appendChild(cell);
+                
+                daBody.appendChild(row);
+            }
+            
+            daDiv.appendChild(daTable);
+            psContainer.appendChild(daDiv);
+            
+            // Day Of Capacity
+            const doDiv = document.createElement('div');
+            doDiv.innerHTML = '<h4>Day Of Capacity Rates ($/kW-month)</h4>';
+            const doTable = document.createElement('table');
+            doTable.className = 'rate-table';
+            doTable.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Year Range</th>
+                        <th>Rate</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            `;
+            const doBody = doTable.querySelector('tbody');
+            
+            for (const year in currentData.apsRates.peakSolutions.dayOfCapacity) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>20${year}</td>`;
+                
+                const cell = document.createElement('td');
+                const input = createRateInput(
+                    currentData.apsRates.peakSolutions.dayOfCapacity[year],
+                    `apsRates.peakSolutions.dayOfCapacity.${year}`
+                );
+                cell.appendChild(input);
+                row.appendChild(cell);
+                
+                doBody.appendChild(row);
+            }
+            
+            doDiv.appendChild(doTable);
+            psContainer.appendChild(doDiv);
+            
+            // Energy Rates
+            const energyDiv = document.createElement('div');
+            energyDiv.innerHTML = '<h4>Energy Rates ($/kWh)</h4>';
+            const energyTable = document.createElement('table');
+            energyTable.className = 'rate-table';
+            energyTable.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Year Range</th>
+                        <th>Rate</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            `;
+            const energyBody = energyTable.querySelector('tbody');
+            
+            for (const year in currentData.apsRates.peakSolutions.energy) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>20${year}</td>`;
+                
+                const cell = document.createElement('td');
+                const input = createRateInput(
+                    currentData.apsRates.peakSolutions.energy[year],
+                    `apsRates.peakSolutions.energy.${year}`
+                );
+                cell.appendChild(input);
+                row.appendChild(cell);
+                
+                energyBody.appendChild(row);
+            }
+            
+            energyDiv.appendChild(energyTable);
+            psContainer.appendChild(energyDiv);
+        }
+
+        // Populate MDU tables
+        function populateMDUTables() {
+            const drrContainer = document.getElementById('drr-rates');
+            drrContainer.innerHTML = '';
+            
+            // Peak Capacity
+            const peakDiv = document.createElement('div');
+            peakDiv.innerHTML = '<h4>Peak Capacity Rates ($/kW-month)</h4>';
+            const peakTable = document.createElement('table');
+            peakTable.className = 'rate-table';
+            peakTable.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Year Range</th>
+                        <th>Rate</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            `;
+            const peakBody = peakTable.querySelector('tbody');
+            
+            for (const year in currentData.mduRates.drr.peakCapacity) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>20${year}</td>`;
+                
+                const cell = document.createElement('td');
+                const input = createRateInput(
+                    currentData.mduRates.drr.peakCapacity[year],
+                    `mduRates.drr.peakCapacity.${year}`
+                );
+                cell.appendChild(input);
+                row.appendChild(cell);
+                
+                peakBody.appendChild(row);
+            }
+            
+            peakDiv.appendChild(peakTable);
+            drrContainer.appendChild(peakDiv);
+            
+            // Off-Peak Capacity
+            const offPeakDiv = document.createElement('div');
+            offPeakDiv.innerHTML = '<h4>Off-Peak Capacity Rates ($/kW-month)</h4>';
+            const offPeakTable = document.createElement('table');
+            offPeakTable.className = 'rate-table';
+            offPeakTable.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Year Range</th>
+                        <th>Rate</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            `;
+            const offPeakBody = offPeakTable.querySelector('tbody');
+            
+            for (const year in currentData.mduRates.drr.offPeakCapacity) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>20${year}</td>`;
+                
+                const cell = document.createElement('td');
+                const input = createRateInput(
+                    currentData.mduRates.drr.offPeakCapacity[year],
+                    `mduRates.drr.offPeakCapacity.${year}`
+                );
+                cell.appendChild(input);
+                row.appendChild(cell);
+                
+                offPeakBody.appendChild(row);
+            }
+            
+            offPeakDiv.appendChild(offPeakTable);
+            drrContainer.appendChild(offPeakDiv);
+            
+            // Energy Rates
+            const energyDiv = document.createElement('div');
+            energyDiv.innerHTML = '<h4>Energy Rates ($/kWh)</h4>';
+            const energyTable = document.createElement('table');
+            energyTable.className = 'rate-table';
+            energyTable.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Year Range</th>
+                        <th>Rate</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            `;
+            const energyBody = energyTable.querySelector('tbody');
+            
+            for (const year in currentData.mduRates.drr.energy) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>20${year}</td>`;
+                
+                const cell = document.createElement('td');
+                const input = createRateInput(
+                    currentData.mduRates.drr.energy[year],
+                    `mduRates.drr.energy.${year}`
+                );
+                cell.appendChild(input);
+                row.appendChild(cell);
+                
+                energyBody.appendChild(row);
+            }
+            
+            energyDiv.appendChild(energyTable);
+            drrContainer.appendChild(energyDiv);
+        }
+
+        // Populate MISO tables
+        function populateMISOTables() {
+            const lmrBody = document.getElementById('lmr-rates');
+            lmrBody.innerHTML = '';
+            
+            for (const year in currentData.misoRates.lmr.capacity) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>20${year}</td>`;
+                
+                const cell = document.createElement('td');
+                const input = createRateInput(
+                    currentData.misoRates.lmr.capacity[year],
+                    `misoRates.lmr.capacity.${year}`
+                );
+                cell.appendChild(input);
+                row.appendChild(cell);
+                
+                lmrBody.appendChild(row);
+            }
+        }
+
+        // Populate PJM tables
+        function populatePJMTables() {
+            // EC Rates by Zone
+            const ecBody = document.getElementById('ec-rates');
+            ecBody.innerHTML = '';
+            
+            for (const zone in currentData.pjmRates.ec.zones) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${zone}</td>`;
+                
+                const capacityCell = document.createElement('td');
+                const capacityInput = createRateInput(
+                    currentData.pjmRates.ec.zones[zone].capacity,
+                    `pjmRates.ec.zones.${zone}.capacity`
+                );
+                capacityCell.appendChild(capacityInput);
+                row.appendChild(capacityCell);
+                
+                const excessCell = document.createElement('td');
+                const excessInput = createRateInput(
+                    currentData.pjmRates.ec.zones[zone].excess,
+                    `pjmRates.ec.zones.${zone}.excess`
+                );
+                excessCell.appendChild(excessInput);
+                row.appendChild(excessCell);
+                
+                ecBody.appendChild(row);
+            }
+            
+            // ELCC Values
+            const elccBody = document.getElementById('elcc-values');
+            elccBody.innerHTML = '';
+            
+            for (const year in currentData.pjmRates.elcc) {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${year}</td>`;
+                
+                const cell = document.createElement('td');
+                const input = createRateInput(
+                    currentData.pjmRates.elcc[year],
+                    `pjmRates.elcc.${year}`
+                );
+                cell.appendChild(input);
+                row.appendChild(cell);
+                
+                elccBody.appendChild(row);
+            }
+        }
+    </script>
+    
+    <!-- Dynamics 365 Integration -->
+    <script src="dynamics-pricing-integration.js"></script>
+</body>
+</html>

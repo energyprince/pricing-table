@@ -1,0 +1,16 @@
+
+> dynamics-365-pricing-integration@1.0.0 start
+> node dynamics-server.js
+
+(node:8915) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+🚀 Dynamics 365 Proxy Server Started
+📡 Running on: http://localhost:3001
+📋 Available endpoints:
+   GET  /api/test-connection
+   POST /api/update-program/:programId
+   GET  /api/program/:programId
+   GET  /api/programs/search?name=ProgramName
+   POST /api/update-ri-targeted-dispatch
+
+🧪 Test connection: http://localhost:3001/api/test-connection

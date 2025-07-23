@@ -1,0 +1,29 @@
+{
+  "name": "dynamics-365-pricing-integration",
+  "version": "1.0.0",
+  "description": "Dynamics 365 integration for pricing table editor",
+  "main": "dynamics-server.js",
+  "scripts": {
+    "start": "node dynamics-server.js",
+    "start-editor": "node pricing-editor-server.js",
+    "test-connection": "curl http://localhost:3001/api/test-connection",
+    "find-ri-program": "curl \"http://localhost:3001/api/programs/search?name=Rhode%20Island%20Connected%20Solutions-Targeted%20Dispatch\"",
+    "list-programs": "node list-all-programs.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "node-fetch": "^2.7.0",
+    "axios": "^1.6.2",
+    "colors": "^1.4.0",
+    "dotenv": "^16.3.1"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "dynamics365",
+    "pricing",
+    "integration"
+  ],
+  "author": "",
+  "license": "ISC"
+}
