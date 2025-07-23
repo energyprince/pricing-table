@@ -1,0 +1,1538 @@
+﻿{
+    "success":  true,
+    "totalFields":  261,
+    "relevantFields":  [
+                           {
+                               "logicalName":  "actualvalue",
+                               "displayName":  "Actual Revenue",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "actualvalue_base",
+                               "displayName":  "Actual Revenue (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_aggregatedmwvalue",
+                               "displayName":  "Aggregated MW Value",
+                               "type":  "Decimal"
+                           },
+                           {
+                               "logicalName":  "cpw_estimatedannualrevenue",
+                               "displayName":  "Estimated Year 1 Revenue",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_estimatedannualrevenue_base",
+                               "displayName":  "Estimated Annual Revenue (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_estimatedfullterm3rdparty2revenue",
+                               "displayName":  "Estimated Full Term 3rd Party 2 Revenue",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_estimatedfullterm3rdparty2revenue_base",
+                               "displayName":  "Estimated Full Term 3rd Party 2 Revenue (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_estimatedfullterm3rdpartyrevenue",
+                               "displayName":  "Estimated Full Term 3rd Party Revenue",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_estimatedfullterm3rdpartyrevenue_base",
+                               "displayName":  "Estimated Full Term 3rd Party Revenue (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_estimatedfulltermcustomerrevenue",
+                               "displayName":  "Estimated Full Term Customer Revenue",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_estimatedfulltermcustomerrevenue_base",
+                               "displayName":  "Estimated Full Term Customer Revenue (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_estimatedyear13rdparty2revenue",
+                               "displayName":  "Estimated Year 1 3rd Party 2 Revenue",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_estimatedyear13rdparty2revenue_base",
+                               "displayName":  "Estimated Year 1 3rd Party 2 Revenue (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_estimatedyear13rdpartyrevenue",
+                               "displayName":  "Estimated Year 1 3rd Party Revenue",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_estimatedyear13rdpartyrevenue_base",
+                               "displayName":  "Estimated Year 1 3rd Party Revenue (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_estimatedyear1customerrevenue",
+                               "displayName":  "Estimated Year 1 Customer Revenue",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_estimatedyear1customerrevenue_base",
+                               "displayName":  "Estimated Year 1 Customer Revenue (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_mktoprogram",
+                               "displayName":  "Mkto Program",
+                               "type":  "String"
+                           },
+                           {
+                               "logicalName":  "cpw_mktoprogramoption",
+                               "displayName":  "Mkto Program Option",
+                               "type":  "String"
+                           },
+                           {
+                               "logicalName":  "cpw_program",
+                               "displayName":  "Program",
+                               "type":  "Lookup"
+                           },
+                           {
+                               "logicalName":  "cpw_programoption",
+                               "displayName":  "Program Option",
+                               "type":  "Lookup"
+                           },
+                           {
+                               "logicalName":  "cpw_salesleadpercenttotal",
+                               "displayName":  "Sales Lead % Total",
+                               "type":  "Decimal"
+                           },
+                           {
+                               "logicalName":  "cpw_totalestimatedrevenue",
+                               "displayName":  "Total Estimated Revenue",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_totalestimatedrevenue_base",
+                               "displayName":  "Total Estimated Revenue (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_totalgrossmargin",
+                               "displayName":  "Estimated Full Term CPower Margin",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_totalgrossmargin_base",
+                               "displayName":  "Total Gross Margin (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_weightedaggregatedmwvalue",
+                               "displayName":  "Weighted Projected MW Value",
+                               "type":  "Decimal"
+                           },
+                           {
+                               "logicalName":  "cpw_weightedestimatedrevenue",
+                               "displayName":  "Weighted Estimated Full Term Revenue",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "cpw_weightedestimatedrevenue_base",
+                               "displayName":  "Weighted Estimated Revenue (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "estimatedclosedate",
+                               "displayName":  "Est. Close Date",
+                               "type":  "DateTime"
+                           },
+                           {
+                               "logicalName":  "estimatedvalue",
+                               "displayName":  "Estimated Full Term Revenue",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "estimatedvalue_base",
+                               "displayName":  "Est. Revenue (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "isrevenuesystemcalculated",
+                               "displayName":  "Revenue",
+                               "type":  "Boolean"
+                           },
+                           {
+                               "logicalName":  "totalamount",
+                               "displayName":  "Total Amount",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "totalamount_base",
+                               "displayName":  "Total Amount (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "totalamountlessfreight",
+                               "displayName":  "Total Pre-Freight Amount",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "totalamountlessfreight_base",
+                               "displayName":  "Total Pre-Freight Amount (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "totaldiscountamount",
+                               "displayName":  "Total Discount Amount",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "totaldiscountamount_base",
+                               "displayName":  "Total Discount Amount (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "totallineitemamount",
+                               "displayName":  "Total Detail Amount",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "totallineitemamount_base",
+                               "displayName":  "Total Detail Amount (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "totallineitemdiscountamount",
+                               "displayName":  "Total Line Item Discount Amount",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "totallineitemdiscountamount_base",
+                               "displayName":  "Total Line Item Discount Amount (Base)",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "totaltax",
+                               "displayName":  "Total Tax",
+                               "type":  "Money"
+                           },
+                           {
+                               "logicalName":  "totaltax_base",
+                               "displayName":  "Total Tax (Base)",
+                               "type":  "Money"
+                           }
+                       ],
+    "allFields":  [
+                      {
+                          "logicalName":  "accountid",
+                          "displayName":  "Account",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "actualclosedate",
+                          "displayName":  "Actual Close Date",
+                          "type":  "DateTime"
+                      },
+                      {
+                          "logicalName":  "actualvalue",
+                          "displayName":  "Actual Revenue",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "actualvalue_base",
+                          "displayName":  "Actual Revenue (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "budgetamount",
+                          "displayName":  "Budget Amount-Not Used",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "budgetamount_base",
+                          "displayName":  "Budget Amount (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "budgetstatus",
+                          "displayName":  "Budget-Not Used",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "campaignid",
+                          "displayName":  "Source Campaign",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "captureproposalfeedback",
+                          "displayName":  "Proposal Feedback Captured",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "closeprobability",
+                          "displayName":  "Probability",
+                          "type":  "Integer"
+                      },
+                      {
+                          "logicalName":  "completefinalproposal",
+                          "displayName":  "Final Proposal Ready",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "completeinternalreview",
+                          "displayName":  "Complete Internal Review",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "confirminterest",
+                          "displayName":  "Confirm Interest",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "contactid",
+                          "displayName":  "Contact",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_accountexecutive",
+                          "displayName":  "Sales Lead 1",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_accountexecutive2",
+                          "displayName":  "Sales Lead 2",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_accountexecutive2share",
+                          "displayName":  "Sales Lead 2 %",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "cpw_accountexecutive3",
+                          "displayName":  "Sales Lead 3",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_accountexecutive3share",
+                          "displayName":  "Sales Lead 3 %",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "cpw_accountexecutive4",
+                          "displayName":  "Sales Lead 4",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_accountexecutive4share",
+                          "displayName":  "Sales Lead 4 %",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "cpw_accountexecutivepercentage",
+                          "displayName":  "Sales Lead 1 %",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "cpw_accountsadded",
+                          "displayName":  "Accounts Added",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "cpw_accountschedulereceived",
+                          "displayName":  "Signed Contract Received",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "cpw_aggregatedmwvalue",
+                          "displayName":  "Aggregated MW Value",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "cpw_agreetoproceed",
+                          "displayName":  "Agree to Proceed",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_annualgrossmargin",
+                          "displayName":  "Estimated Year 1 CPower Margin",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_annualgrossmargin_base",
+                          "displayName":  "Annual Gross Margin (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_autodrstatus",
+                          "displayName":  "AutoDR Customer?",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_availablemeteroptions",
+                          "displayName":  "Available Meter Options",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_becomment",
+                          "displayName":  "BE Comment",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_bizdevrep",
+                          "displayName":  "Business Development Rep",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_businessdevreppercentage",
+                          "displayName":  "Business Development Rep %",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_commitment",
+                          "displayName":  "Commitment",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_competitordetailscomments",
+                          "displayName":  "Competitor Details/Comments",
+                          "type":  "Memo"
+                      },
+                      {
+                          "logicalName":  "cpw_contractid",
+                          "displayName":  "Contract ID",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_contractreviewstarted",
+                          "displayName":  "Contract Review Started?",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "cpw_contractsignatory",
+                          "displayName":  "Contract Signatory",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_contracttype",
+                          "displayName":  "Contract Template Type",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_cpmanagedprojectid",
+                          "displayName":  "Project ID",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_cpowerfunded",
+                          "displayName":  "CPower Funded?",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "cpw_cpowerreason",
+                          "displayName":  "CPower Reason",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_cpowershare",
+                          "displayName":  "CPower Share %",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "cpw_createcontractscompleted",
+                          "displayName":  "Create Contracts Completed",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "cpw_customerenergypayment",
+                          "displayName":  "Customer Energy Payment %",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "cpw_customerreason",
+                          "displayName":  "Customer Reason",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_customersharepercent",
+                          "displayName":  "Customer Share %",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "cpw_customersigneddate",
+                          "displayName":  "Customer Signed Date",
+                          "type":  "DateTime"
+                      },
+                      {
+                          "logicalName":  "cpw_decidingside",
+                          "displayName":  "Deciding Side",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_enddate",
+                          "displayName":  "End Date",
+                          "type":  "DateTime"
+                      },
+                      {
+                          "logicalName":  "cpw_errorreason",
+                          "displayName":  "Error Reason",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_estimatedannualrevenue",
+                          "displayName":  "Estimated Year 1 Revenue",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_estimatedannualrevenue_base",
+                          "displayName":  "Estimated Annual Revenue (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_estimatedfullterm3rdparty2revenue",
+                          "displayName":  "Estimated Full Term 3rd Party 2 Revenue",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_estimatedfullterm3rdparty2revenue_base",
+                          "displayName":  "Estimated Full Term 3rd Party 2 Revenue (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_estimatedfullterm3rdpartyrevenue",
+                          "displayName":  "Estimated Full Term 3rd Party Revenue",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_estimatedfullterm3rdpartyrevenue_base",
+                          "displayName":  "Estimated Full Term 3rd Party Revenue (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_estimatedfulltermcustomerrevenue",
+                          "displayName":  "Estimated Full Term Customer Revenue",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_estimatedfulltermcustomerrevenue_base",
+                          "displayName":  "Estimated Full Term Customer Revenue (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_estimatedyear13rdparty2revenue",
+                          "displayName":  "Estimated Year 1 3rd Party 2 Revenue",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_estimatedyear13rdparty2revenue_base",
+                          "displayName":  "Estimated Year 1 3rd Party 2 Revenue (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_estimatedyear13rdpartyrevenue",
+                          "displayName":  "Estimated Year 1 3rd Party Revenue",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_estimatedyear13rdpartyrevenue_base",
+                          "displayName":  "Estimated Year 1 3rd Party Revenue (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_estimatedyear1customerrevenue",
+                          "displayName":  "Estimated Year 1 Customer Revenue",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_estimatedyear1customerrevenue_base",
+                          "displayName":  "Estimated Year 1 Customer Revenue (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_executivereviewcomplete",
+                          "displayName":  "Executive Review Complete?",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_fixedprice",
+                          "displayName":  "Fixed Price?",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "cpw_flowsession",
+                          "displayName":  "Flow Session",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_generatorinfo",
+                          "displayName":  "Generator Info",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_generatorinvolved",
+                          "displayName":  "DER Involved?",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "cpw_iso",
+                          "displayName":  "ISO",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_meteringfootertext",
+                          "displayName":  "meteringFooterText",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_meteringneeded",
+                          "displayName":  "Metering Needed?",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_meteringoption",
+                          "displayName":  "Metering Option",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_meteringoptout",
+                          "displayName":  "Immediate Installation Needed?",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_meteringoptoutreason",
+                          "displayName":  "Metering Opt Out Reason",
+                          "type":  "Memo"
+                      },
+                      {
+                          "logicalName":  "cpw_mktoaccountexecutive",
+                          "displayName":  "Mkto Account Executive",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktoaccountexecutive2",
+                          "displayName":  "Mkto Account Executive2",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktoaccountid",
+                          "displayName":  "Mkto AccountID",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktocampaignid",
+                          "displayName":  "Mkto CampaignID",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktocontactid",
+                          "displayName":  "Mkto ContactID",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktocontractsignatory",
+                          "displayName":  "Mkto Contract Signatory",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktocontracttype",
+                          "displayName":  "Mkto Contract Type",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktocreatedby",
+                          "displayName":  "Mkto CreatedBy",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktoiso",
+                          "displayName":  "Mkto ISO",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktoopportunitycontact",
+                          "displayName":  "Mkto Opportunity Contact",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktooriginatingleadid",
+                          "displayName":  "Mkto OriginatingLeadID",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktoowninguser",
+                          "displayName":  "Mkto Owning User Oppty",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktoparentaccountid",
+                          "displayName":  "Mkto ParentAccountID",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktoprogram",
+                          "displayName":  "Mkto Program",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktoprogramoption",
+                          "displayName":  "Mkto Program Option",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktorelatedcontractreviewid",
+                          "displayName":  "Mkto Related Contract ReviewID",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktothirdpartycompany",
+                          "displayName":  "Mkto Third Party Company",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_mktothirdpartycompany2",
+                          "displayName":  "Mkto Third Party Company2",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_nonstandard",
+                          "displayName":  "Non-Standard?",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "cpw_nonstandardpricing",
+                          "displayName":  "Non Standard Pricing?",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "cpw_odesbatterysize",
+                          "displayName":  "ODES Battery Size (kwh)",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "cpw_oppaccountsadded",
+                          "displayName":  "Opp Accounts Added?",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_oppcontractreviewid",
+                          "displayName":  "Contract Review ID",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_opplostnote",
+                          "displayName":  "Opp Lost Note",
+                          "type":  "Memo"
+                      },
+                      {
+                          "logicalName":  "cpw_opportunitycontact",
+                          "displayName":  "Opportunity Contact",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_opptyprojecttype",
+                          "displayName":  "Project Type",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_opptywon",
+                          "displayName":  "Oppty Won?",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_paymentbasis",
+                          "displayName":  "Payment Basis",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_paymentfrequency",
+                          "displayName":  "Payment Frequency",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_portaltaskrequestqa",
+                          "displayName":  "Portal Task Request (QA)",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "cpw_program",
+                          "displayName":  "Program",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_programoption",
+                          "displayName":  "Program Option",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_projectcost",
+                          "displayName":  "Project Cost",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_projectcost_base",
+                          "displayName":  "Project Cost (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_projectedcurtailmentquantity",
+                          "displayName":  "Projected Curtailment Quantity (kW)",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "cpw_proposalpresented",
+                          "displayName":  "Proposal Presented",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_proposalprice",
+                          "displayName":  "Proposal Price",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_proposalprice_base",
+                          "displayName":  "Proposal Price (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_reasonfornonstandard",
+                          "displayName":  "Reason for Non-Standard",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "cpw_relatedcontractreviewid",
+                          "displayName":  "Related Contract Review",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_relatedstocase",
+                          "displayName":  "Related STO Case",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_renewaloption",
+                          "displayName":  "Renewal Option",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_repaperexistingbusiness",
+                          "displayName":  "Re-Paper Existing Business",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "cpw_reversereferralpct",
+                          "displayName":  "Reverse Referral %",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "cpw_reversereferraluom",
+                          "displayName":  "Reverse Referral UOM",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_salesleadpercenttotal",
+                          "displayName":  "Sales Lead % Total",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "cpw_salesprobabilityclose",
+                          "displayName":  "Sales Probability to Close %",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_salesteam",
+                          "displayName":  "Sales Team",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_signedloa",
+                          "displayName":  "Signed LOA",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_soesopportunitystage",
+                          "displayName":  "ODES Opportunity Stage",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_sourcetype",
+                          "displayName":  "Source Type",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_startdate",
+                          "displayName":  "Start Date",
+                          "type":  "DateTime"
+                      },
+                      {
+                          "logicalName":  "cpw_termyears",
+                          "displayName":  "Term (Years)",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "cpw_thirdparty2relationshiptype",
+                          "displayName":  "Third Party 2 Relationship Type",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_thirdparty2share",
+                          "displayName":  "Third Party 2 Share %",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "cpw_thirdparty2uom",
+                          "displayName":  "Third Party 2 UOM",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_thirdpartycompany",
+                          "displayName":  "Third Party",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_thirdpartycompany2",
+                          "displayName":  "Third Party 2",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "cpw_thirdpartypercent",
+                          "displayName":  "Third Party %",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "cpw_thirdpartyrelationship",
+                          "displayName":  "Third Party Relationship Type",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_tmsoption",
+                          "displayName":  "TMS Option",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_toggleaccountschedule",
+                          "displayName":  "Toggle Account Schedule (Delete)",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "cpw_togglecontractcreation",
+                          "displayName":  "Toggle Contract Creation (Delete)",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "cpw_totalestimatedrevenue",
+                          "displayName":  "Total Estimated Revenue",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_totalestimatedrevenue_base",
+                          "displayName":  "Total Estimated Revenue (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_totalgrossmargin",
+                          "displayName":  "Estimated Full Term CPower Margin",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_totalgrossmargin_base",
+                          "displayName":  "Total Gross Margin (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_type",
+                          "displayName":  "Opportunity Type",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_uom",
+                          "displayName":  "Third Party UOM",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_utilitybills",
+                          "displayName":  "Utility Bills",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_w9onfile",
+                          "displayName":  "W-9 On File?",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "cpw_weightedaggregatedmwvalue",
+                          "displayName":  "Weighted Projected MW Value",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "cpw_weightedestimatedrevenue",
+                          "displayName":  "Weighted Estimated Full Term Revenue",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_weightedestimatedrevenue_base",
+                          "displayName":  "Weighted Estimated Revenue (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "cpw_wonlostcategory",
+                          "displayName":  "Won/Lost Category",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "cpw_wonlostreason",
+                          "displayName":  "Won/Lost Reason",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "createdby",
+                          "displayName":  "Created By",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "createdon",
+                          "displayName":  "Created On",
+                          "type":  "DateTime"
+                      },
+                      {
+                          "logicalName":  "createdonbehalfby",
+                          "displayName":  "Created By (Delegate)",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "currentsituation",
+                          "displayName":  "Current Situation",
+                          "type":  "Memo"
+                      },
+                      {
+                          "logicalName":  "customerid",
+                          "displayName":  "Potential Customer",
+                          "type":  "Customer"
+                      },
+                      {
+                          "logicalName":  "customerneed",
+                          "displayName":  "Customer Need",
+                          "type":  "Memo"
+                      },
+                      {
+                          "logicalName":  "customerpainpoints",
+                          "displayName":  "Customer Pain Points",
+                          "type":  "Memo"
+                      },
+                      {
+                          "logicalName":  "decisionmaker",
+                          "displayName":  "Decision Maker?",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "description",
+                          "displayName":  "Description",
+                          "type":  "Memo"
+                      },
+                      {
+                          "logicalName":  "developproposal",
+                          "displayName":  "Develop Proposal",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "discountamount",
+                          "displayName":  "Opportunity Discount Amount",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "discountamount_base",
+                          "displayName":  "Opportunity Discount Amount (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "discountpercentage",
+                          "displayName":  "Opportunity Discount (%)",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "emailaddress",
+                          "displayName":  "Email Address",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "estimatedclosedate",
+                          "displayName":  "Est. Close Date",
+                          "type":  "DateTime"
+                      },
+                      {
+                          "logicalName":  "estimatedvalue",
+                          "displayName":  "Estimated Full Term Revenue",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "estimatedvalue_base",
+                          "displayName":  "Est. Revenue (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "evaluatefit",
+                          "displayName":  "Evaluate Fit",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "exchangerate",
+                          "displayName":  "Exchange Rate",
+                          "type":  "Decimal"
+                      },
+                      {
+                          "logicalName":  "filedebrief",
+                          "displayName":  "File Debrief",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "finaldecisiondate",
+                          "displayName":  "Final Decision Date",
+                          "type":  "DateTime"
+                      },
+                      {
+                          "logicalName":  "freightamount",
+                          "displayName":  "Freight Amount",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "freightamount_base",
+                          "displayName":  "Freight Amount (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "identifycompetitors",
+                          "displayName":  "Identify Competitors",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "identifycustomercontacts",
+                          "displayName":  "Identify Customer Contacts",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "identifypursuitteam",
+                          "displayName":  "Identify Sales Team",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "importsequencenumber",
+                          "displayName":  "Import Sequence Number",
+                          "type":  "Integer"
+                      },
+                      {
+                          "logicalName":  "initialcommunication",
+                          "displayName":  "Initial Communication",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "isprivate",
+                          "displayName":  "Is Private",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "isrevenuesystemcalculated",
+                          "displayName":  "Revenue",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "lastonholdtime",
+                          "displayName":  "Last On Hold Time",
+                          "type":  "DateTime"
+                      },
+                      {
+                          "logicalName":  "modifiedby",
+                          "displayName":  "Modified By",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "modifiedon",
+                          "displayName":  "Modified On",
+                          "type":  "DateTime"
+                      },
+                      {
+                          "logicalName":  "modifiedonbehalfby",
+                          "displayName":  "Modified By (Delegate)",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "msdyn_forecastcategory",
+                          "displayName":  "Forecast category",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "msdyn_gdproptout",
+                          "displayName":  "GDPR Optout",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "msdyn_opportunitygrade",
+                          "displayName":  "(Deprecated) Opportunity Grade",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "msdyn_opportunitykpiid",
+                          "displayName":  "KPI",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "msdyn_opportunityscore",
+                          "displayName":  "(Deprecated) Opportunity Score",
+                          "type":  "Integer"
+                      },
+                      {
+                          "logicalName":  "msdyn_opportunityscoretrend",
+                          "displayName":  "(Deprecated) Opportunity Score Trend",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "msdyn_ordertype",
+                          "displayName":  "Order Type",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "msdyn_predictivescoreid",
+                          "displayName":  "Predictive Score",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "msdyn_scorehistory",
+                          "displayName":  "(Deprecated) Score History",
+                          "type":  "Memo"
+                      },
+                      {
+                          "logicalName":  "msdyn_scorereasons",
+                          "displayName":  "(Deprecated) Score Reasons",
+                          "type":  "Memo"
+                      },
+                      {
+                          "logicalName":  "msdyn_segmentid",
+                          "displayName":  "Segment Id",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "msdyn_similaropportunities",
+                          "displayName":  "msdyn_similaropportunities",
+                          "type":  "Memo"
+                      },
+                      {
+                          "logicalName":  "msdyn_workordertype",
+                          "displayName":  "Work Order Type",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "name",
+                          "displayName":  "Opportunity ID",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "need",
+                          "displayName":  "Need",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "new_contractedmeterlanguage",
+                          "displayName":  "Contracted Meter Language",
+                          "type":  "Memo"
+                      },
+                      {
+                          "logicalName":  "onholdtime",
+                          "displayName":  "On Hold Time (Minutes)",
+                          "type":  "Integer"
+                      },
+                      {
+                          "logicalName":  "opportunityid",
+                          "displayName":  "Opportunity",
+                          "type":  "Uniqueidentifier"
+                      },
+                      {
+                          "logicalName":  "opportunityratingcode",
+                          "displayName":  "Rating",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "originatingleadid",
+                          "displayName":  "Originating Lead",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "overriddencreatedon",
+                          "displayName":  "Record Created On",
+                          "type":  "DateTime"
+                      },
+                      {
+                          "logicalName":  "ownerid",
+                          "displayName":  "Owner",
+                          "type":  "Owner"
+                      },
+                      {
+                          "logicalName":  "owningbusinessunit",
+                          "displayName":  "Owning Business Unit",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "owningteam",
+                          "displayName":  "Owning Team",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "owninguser",
+                          "displayName":  "Owning User",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "parentaccountid",
+                          "displayName":  "Account",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "parentcontactid",
+                          "displayName":  "Contact",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "participatesinworkflow",
+                          "displayName":  "Participates in Workflow",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "presentfinalproposal",
+                          "displayName":  "Present Final Proposal",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "presentproposal",
+                          "displayName":  "Presented Proposal",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "pricelevelid",
+                          "displayName":  "Price List",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "pricingerrorcode",
+                          "displayName":  "Pricing Error ",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "prioritycode",
+                          "displayName":  "Priority",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "processid",
+                          "displayName":  "Process",
+                          "type":  "Uniqueidentifier"
+                      },
+                      {
+                          "logicalName":  "proposedsolution",
+                          "displayName":  "Proposed Solution",
+                          "type":  "Memo"
+                      },
+                      {
+                          "logicalName":  "purchaseprocess",
+                          "displayName":  "Purchase Process",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "purchasetimeframe",
+                          "displayName":  "Estimated Timeframe",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "pursuitdecision",
+                          "displayName":  "Decide Go/No-Go",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "qualificationcomments",
+                          "displayName":  "Qualification Comments",
+                          "type":  "Memo"
+                      },
+                      {
+                          "logicalName":  "quotecomments",
+                          "displayName":  "Quote Comments",
+                          "type":  "Memo"
+                      },
+                      {
+                          "logicalName":  "resolvefeedback",
+                          "displayName":  "Feedback Resolved",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "salesstage",
+                          "displayName":  "Sales Stage-Not Used",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "salesstagecode",
+                          "displayName":  "Process Code",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "schedulefollowup_prospect",
+                          "displayName":  "Scheduled Follow up (Prospect)",
+                          "type":  "DateTime"
+                      },
+                      {
+                          "logicalName":  "schedulefollowup_qualify",
+                          "displayName":  "Scheduled Follow up (Qualify)",
+                          "type":  "DateTime"
+                      },
+                      {
+                          "logicalName":  "scheduleproposalmeeting",
+                          "displayName":  "Schedule Proposal Meeting",
+                          "type":  "DateTime"
+                      },
+                      {
+                          "logicalName":  "sendthankyounote",
+                          "displayName":  "Send Thank You Note",
+                          "type":  "Boolean"
+                      },
+                      {
+                          "logicalName":  "skippricecalculation",
+                          "displayName":  "Skip Price Calculation",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "slaid",
+                          "displayName":  "SLA",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "slainvokedid",
+                          "displayName":  "Last SLA applied",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "stageid",
+                          "displayName":  "Process Stage",
+                          "type":  "Uniqueidentifier"
+                      },
+                      {
+                          "logicalName":  "statecode",
+                          "displayName":  "Status",
+                          "type":  "State"
+                      },
+                      {
+                          "logicalName":  "statuscode",
+                          "displayName":  "Status Reason",
+                          "type":  "Status"
+                      },
+                      {
+                          "logicalName":  "stepid",
+                          "displayName":  "Step",
+                          "type":  "Uniqueidentifier"
+                      },
+                      {
+                          "logicalName":  "stepname",
+                          "displayName":  "Pipeline Phase",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "teamsfollowed",
+                          "displayName":  "TeamsFollowed",
+                          "type":  "Integer"
+                      },
+                      {
+                          "logicalName":  "timeline",
+                          "displayName":  "Timeline",
+                          "type":  "Picklist"
+                      },
+                      {
+                          "logicalName":  "timespentbymeonemailandmeetings",
+                          "displayName":  "Time Spent by me",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "timezoneruleversionnumber",
+                          "displayName":  "Time Zone Rule Version Number",
+                          "type":  "Integer"
+                      },
+                      {
+                          "logicalName":  "totalamount",
+                          "displayName":  "Total Amount",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "totalamount_base",
+                          "displayName":  "Total Amount (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "totalamountlessfreight",
+                          "displayName":  "Total Pre-Freight Amount",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "totalamountlessfreight_base",
+                          "displayName":  "Total Pre-Freight Amount (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "totaldiscountamount",
+                          "displayName":  "Total Discount Amount",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "totaldiscountamount_base",
+                          "displayName":  "Total Discount Amount (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "totallineitemamount",
+                          "displayName":  "Total Detail Amount",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "totallineitemamount_base",
+                          "displayName":  "Total Detail Amount (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "totallineitemdiscountamount",
+                          "displayName":  "Total Line Item Discount Amount",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "totallineitemdiscountamount_base",
+                          "displayName":  "Total Line Item Discount Amount (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "totaltax",
+                          "displayName":  "Total Tax",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "totaltax_base",
+                          "displayName":  "Total Tax (Base)",
+                          "type":  "Money"
+                      },
+                      {
+                          "logicalName":  "transactioncurrencyid",
+                          "displayName":  "Currency",
+                          "type":  "Lookup"
+                      },
+                      {
+                          "logicalName":  "traversedpath",
+                          "displayName":  "Traversed Path",
+                          "type":  "String"
+                      },
+                      {
+                          "logicalName":  "utcconversiontimezonecode",
+                          "displayName":  "UTC Conversion Time Zone Code",
+                          "type":  "Integer"
+                      },
+                      {
+                          "logicalName":  "versionnumber",
+                          "displayName":  "Version Number",
+                          "type":  "BigInt"
+                      }
+                  ]
+}
